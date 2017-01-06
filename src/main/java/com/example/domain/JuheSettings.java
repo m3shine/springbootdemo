@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * Created by djklaf on 2017/1/5.
  */
 @Component
-@ConfigurationProperties(prefix = "juhe",locations = "wsconf.properties")
+@ConfigurationProperties(prefix = "juhe",locations = "classpath:/wsconf.properties")
 public class JuheSettings {
     private String url;
     private String appkey;
