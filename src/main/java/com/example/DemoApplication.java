@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.core.env.Environment;
+import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
 
 @RestController
 @SpringBootApplication
@@ -25,7 +28,7 @@ public class DemoApplication {
 	}
 
 	@RequestMapping(value = "/stock")
-	String getAll(){
+	public Map getAll(){
 
 		//return ev.toString();
 		//从application.properties中获取
@@ -37,8 +40,15 @@ public class DemoApplication {
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(url, String.class);
 
-		return result;
+		JacksonJsonParser jsonParser = new JacksonJsonParser();
+		Map map = jsonParser.parseMap(result);
+		if(map!=null & "SUCCESSED!".equals(map.get("reason").toString())){
+			return (Map)map.get("result");
+		}
+		return null;
 	}
+
+
 
 
 	public static void main(String[] args) {
