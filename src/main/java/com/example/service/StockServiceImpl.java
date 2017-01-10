@@ -32,8 +32,8 @@ public class StockServiceImpl implements StockService {
                 if(array.size()>0){
                     for (int i = 0; i <array.size() ; i++) {
                         Stock stock = new Stock();
-                        stock.setCode(array.getJSONObject(i).get("code").toString());
-                        stock.setName(array.getJSONObject(i).get("name").toString());
+                        stock.setCode(array.getJSONObject(i).getString("code"));
+                        stock.setName(array.getJSONObject(i).getString("name"));
                         stock.setSettlement(array.getJSONObject(i).getDouble("settlement"));
                         stock.setDate(new Date());
                         stock.setAmount(array.getJSONObject(i).getDouble("amount"));

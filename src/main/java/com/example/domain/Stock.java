@@ -22,7 +22,7 @@ public class Stock {
     @Column(nullable = false)
     private Double settlement;
 
-    /*
+    /**
     涨跌百分比
      */
     @Column(nullable = false)
@@ -31,13 +31,13 @@ public class Stock {
     @Column(nullable = false)
     private Date date;
 
-    /*
+    /**
     成交量
      */
     @Column(nullable = false)
     private Double volume;
 
-    /*
+    /**
     成交额
      */
     @Column(nullable = false)
@@ -53,10 +53,6 @@ public class Stock {
 
     public Long getId() {
         return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
     }
 
     public String getCode() {

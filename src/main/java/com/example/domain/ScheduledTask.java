@@ -15,8 +15,8 @@ public class ScheduledTask {
     private static final Logger log = LoggerFactory.getLogger(ScheduledTask.class);
     //private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    //@Scheduled(fixedRate = 5000)
-    public void execEndPribyDay(){
+    @Scheduled(cron = "0 0 16 * * ?")
+    public void anyTask(){
 
     }
 }
