@@ -26,8 +26,9 @@ public class DemoApplication {
 	Juhe juhe;
 
 	@RequestMapping("/")
-	String home(){
-		return "Hello World!";
+	JSONObject home(){
+		JSONObject res = juhe.call("finance/stock/shall","&stock=a");
+		return res;
 	}
 
 	public static void main(String[] args) {

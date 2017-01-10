@@ -25,17 +25,22 @@ public class StockServiceImpl implements StockService {
     @Override
     @Transactional
     public void updateStocks(){
-        JSONObject res = juhe.call("finance/stock/shall","&stock=a");
-        if(res != null){
-            JSONArray array = res.getJSONArray("data");
-            if(array.size()>0){
-                for (int i = 0; i <array.size() ; i++) {
-                    Stock stock = new Stock();
-                    stock.setCode(array.getJSONObject(i).get("code").toString());
-                    stock.setName(array.getJSONObject(i).get("name").toString());
-                    stock.setSettlement(Double.parseDouble(array.getJSONObject(i).get("settlement").toString()));
-                    stock.setDate(new Date());
-                    stockRepository.save(stock);
+        for (int page = 1; page < 16; page++) {
+            JSONObject res = juhe.call("finance/stock/shall","&stock=a&type=4&page="+page);
+            if(res != null){
+                JSONArray array = res.getJSONArray("data");
+                if(array.size()>0){
+                    for (int i = 0; i <array.size() ; i++) {
+                        Stock stock = new Stock();
+                        stock.setCode(array.getJSONObject(i).get("code").toString());
+                        stock.setName(array.getJSONObject(i).get("name").toString());
+                        stock.setSettlement(array.getJSONObject(i).getDouble("settlement"));
+                        stock.setDate(new Date());
+                        stock.setAmount(array.getJSONObject(i).getDouble("amount"));
+                        stock.setChangepercent(array.getJSONObject(i).getDouble("changepercent"));
+                        stock.setVolume(array.getJSONObject(i).getDouble("volume"));
+                        stockRepository.save(stock);
+                    }
                 }
             }
         }

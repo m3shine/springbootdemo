@@ -22,8 +22,26 @@ public class Stock {
     @Column(nullable = false)
     private Double settlement;
 
+    /*
+    涨跌百分比
+     */
+    @Column(nullable = false)
+    private Double changepercent;
+
     @Column(nullable = false)
     private Date date;
+
+    /*
+    成交量
+     */
+    @Column(nullable = false)
+    private Double volume;
+
+    /*
+    成交额
+     */
+    @Column(nullable = false)
+    private Double amount;
 
     public Date getDate() {
         return date;
@@ -63,5 +81,30 @@ public class Stock {
 
     public void setSettlement(Double settlement) {
         this.settlement = settlement;
+    }
+
+
+    public Double getChangepercent() {
+        return changepercent;
+    }
+
+    public void setChangepercent(Double changepercent) {
+        this.changepercent = changepercent;
+    }
+
+    public Double getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Double volume) {
+        this.volume = volume;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 }

@@ -35,12 +35,10 @@ public class Juhe {
         RestTemplate restTemplate = new RestTemplate();
         String response = restTemplate.getForObject(url, String.class);
         JSONObject json = JSONObject.fromObject(response);
-        if("SUCCESSED!".equals(json.get("reason"))){
+        if(json.getInt("error_code")==0){
             JSONObject result = json.getJSONObject("result");
             return result;
         }
         return null;
     }
-
-
 }
