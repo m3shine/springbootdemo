@@ -7,7 +7,6 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -23,7 +22,6 @@ public class StockServiceImpl implements StockService {
     Juhe juhe;
 
     @Override
-    @Transactional
     public void updateStocks(){
         for (int page = 1; page < 16; page++) {
             JSONObject res = juhe.call("finance/stock/shall","&stock=a&type=4&page="+page);

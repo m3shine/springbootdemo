@@ -4,7 +4,6 @@ import com.example.domain.Holiday;
 import com.example.domain.HolidayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +31,6 @@ public class HolidayServiceImpl implements HolidayService {
      初始化休市日
      */
     @Override
-    @Transactional
     public void init(){
         Holiday[] yuandan = {
                 new Holiday(convertDate("2017-01-01"),"元旦",0),
