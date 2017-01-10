@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public interface HolidayRepository extends JpaRepository<Holiday,Long>{
 
-    /*Holiday 需大写*/
+    /*from Holiday H需大写*/
     @Query("from Holiday h where h.holiday=:holiday")
     Holiday findByDate(@Param("holiday") Date date);
 }
