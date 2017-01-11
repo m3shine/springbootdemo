@@ -33,42 +33,42 @@ public class HolidayServiceImpl implements HolidayService {
     @Override
     public void init(){
         Holiday[] yuandan = {
-                new Holiday(convertDate("2017-01-01"),"元旦",0),
-                new Holiday(convertDate("2017-01-02"),"元旦",0),
+                new Holiday(str2Date("2017-01-01"),"元旦",0),
+                new Holiday(str2Date("2017-01-02"),"元旦",0),
         };
         Holiday[] chunjie = {
-                new Holiday(convertDate("2017-01-27"),"春节",0),
-                new Holiday(convertDate("2017-01-28"),"春节",0),
-                new Holiday(convertDate("2017-01-29"),"春节",0),
-                new Holiday(convertDate("2017-01-30"),"春节",0),
-                new Holiday(convertDate("2017-01-31"),"春节",0),
-                new Holiday(convertDate("2017-02-01"),"春节",0),
-                new Holiday(convertDate("2017-01-02"),"春节",0),
+                new Holiday(str2Date("2017-01-27"),"春节",0),
+                new Holiday(str2Date("2017-01-28"),"春节",0),
+                new Holiday(str2Date("2017-01-29"),"春节",0),
+                new Holiday(str2Date("2017-01-30"),"春节",0),
+                new Holiday(str2Date("2017-01-31"),"春节",0),
+                new Holiday(str2Date("2017-02-01"),"春节",0),
+                new Holiday(str2Date("2017-01-02"),"春节",0),
         };
         Holiday[] qingming = {
-                new Holiday(convertDate("2017-04-02"),"清明节",0),
-                new Holiday(convertDate("2017-04-03"),"清明节",0),
-                new Holiday(convertDate("2017-04-04"),"清明节",0),
+                new Holiday(str2Date("2017-04-02"),"清明节",0),
+                new Holiday(str2Date("2017-04-03"),"清明节",0),
+                new Holiday(str2Date("2017-04-04"),"清明节",0),
         };
         Holiday[] laodong = {
-                new Holiday(convertDate("2017-04-29"),"劳动节",0),
-                new Holiday(convertDate("2017-04-30"),"劳动节",0),
-                new Holiday(convertDate("2017-05-01"),"劳动节",0),
+                new Holiday(str2Date("2017-04-29"),"劳动节",0),
+                new Holiday(str2Date("2017-04-30"),"劳动节",0),
+                new Holiday(str2Date("2017-05-01"),"劳动节",0),
         };
         Holiday[] duanwu = {
-                new Holiday(convertDate("2017-05-28"),"端午节",0),
-                new Holiday(convertDate("2017-05-29"),"端午节",0),
-                new Holiday(convertDate("2017-05-30"),"端午节",0),
+                new Holiday(str2Date("2017-05-28"),"端午节",0),
+                new Holiday(str2Date("2017-05-29"),"端午节",0),
+                new Holiday(str2Date("2017-05-30"),"端午节",0),
         };
         Holiday[] guoqing = {
-                new Holiday(convertDate("2017-10-01"),"国庆节",0),
-                new Holiday(convertDate("2017-10-02"),"国庆节",0),
-                new Holiday(convertDate("2017-10-03"),"国庆节",0),
-                new Holiday(convertDate("2017-10-04"),"中秋节",0),
-                new Holiday(convertDate("2017-10-05"),"国庆节",0),
-                new Holiday(convertDate("2017-10-06"),"国庆节",0),
-                new Holiday(convertDate("2017-10-07"),"国庆节",0),
-                new Holiday(convertDate("2017-10-08"),"国庆节",0),
+                new Holiday(str2Date("2017-10-01"),"国庆节",0),
+                new Holiday(str2Date("2017-10-02"),"国庆节",0),
+                new Holiday(str2Date("2017-10-03"),"国庆节",0),
+                new Holiday(str2Date("2017-10-04"),"中秋节",0),
+                new Holiday(str2Date("2017-10-05"),"国庆节",0),
+                new Holiday(str2Date("2017-10-06"),"国庆节",0),
+                new Holiday(str2Date("2017-10-07"),"国庆节",0),
+                new Holiday(str2Date("2017-10-08"),"国庆节",0),
         };
 
         for (Holiday h : yuandan){
@@ -95,14 +95,18 @@ public class HolidayServiceImpl implements HolidayService {
      * @return
      */
     public boolean isCloseday(Date date){
-        Holiday holiday1 = holidayRepository.findByDate(convertDate(date.toString()));
+        date = str2Date(date2Str(date));
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(holiday1.getHoliday());
-
-        if(holiday1!=null || isWeekend(calendar)){
+        calendar.setTime(date);
+        if(isWeekend(calendar)){
             return true;
+        }else {
+            Holiday holiday1 = holidayRepository.findByDate(date);
+            if(holiday1!=null){
+                return true;
+            }
+            return false;
         }
-        return false;
     }
 
     /**
@@ -118,7 +122,12 @@ public class HolidayServiceImpl implements HolidayService {
         return false;
     }
 
-    public Date convertDate(String date){
+    /**
+     * String 转 Date
+     * @param date
+     * @return
+     */
+    public Date str2Date(String date){
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         Date dt= null;
         try {
@@ -127,5 +136,21 @@ public class HolidayServiceImpl implements HolidayService {
             e.printStackTrace();
         }
         return dt;
+    }
+
+    /**
+     * Date转String
+     * @param date
+     * @return
+     */
+    public String date2Str(Date date){
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        String str = null;
+        try {
+            str = sdf.format(date);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return str;
     }
 }

@@ -22,11 +22,11 @@ public class StockController {
     @Autowired
     HolidayService holidayService;
 
-    @RequestMapping(value = "/save")
-    public void updateStocks(){
+    @RequestMapping(value = "/showAll")
+    public String showStocks(){
         if(holidayService.isCloseday(new Date())){
-            return;
+            return "";
         }
-        stockService.updateStocks();
+        return stockService.showStocks();
     }
 }

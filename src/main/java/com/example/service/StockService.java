@@ -9,4 +9,6 @@ public interface StockService {
 
     @Transactional
     void updateStocks();
+
+    String showStocks();
 }

@@ -22,13 +22,13 @@ public class StockServiceImpl implements StockService {
     Juhe juhe;
 
     @Override
-    public void updateStocks(){
+    public void updateStocks() {
         for (int page = 1; page < 16; page++) {
-            JSONObject res = juhe.call("finance/stock/shall","&stock=a&type=4&page="+page);
-            if(res != null){
+            JSONObject res = juhe.call("finance/stock/shall", "&stock=a&type=4&page=" + page);
+            if (res != null) {
                 JSONArray array = res.getJSONArray("data");
-                if(array.size()>0){
-                    for (int i = 0; i <array.size() ; i++) {
+                if (array.size() > 0) {
+                    for (int i = 0; i < array.size(); i++) {
                         Stock stock = new Stock();
                         stock.setCode(array.getJSONObject(i).getString("code"));
                         stock.setName(array.getJSONObject(i).getString("name"));
@@ -43,4 +43,20 @@ public class StockServiceImpl implements StockService {
             }
         }
     }
+
+    @Override
+    public String showStocks() {
+        JSONArray arrayList = new JSONArray();
+        for (int page = 1; page < 16; page++) {
+            JSONObject res = juhe.call("finance/stock/shall", "&stock=a&type=4&page=" + page);
+            if (res != null) {
+                JSONArray array = res.getJSONArray("data");
+                if (array.size() > 0) {
+                    arrayList.addAll(array);
+                }
+            }
+        }
+        return arrayList.toString();
+    }
 }
+
