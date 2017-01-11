@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Created by djklaf on 2017/1/6.
@@ -27,7 +26,7 @@ public class UpdateAllStocksDailyTask {
 
     @Scheduled(cron = "0 05 15 * * ?")
     public void updateAllStocksDaily(){
-        if(holidayService.isCloseday(new Date())){
+        if(holidayService.isCloseday(LocalDate.now())){
             return;
         }
         stockService.updateStocks();

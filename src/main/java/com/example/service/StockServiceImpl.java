@@ -2,7 +2,7 @@ package com.example.service;
 
 import com.example.domain.Stock;
 import com.example.domain.StockRepository;
-import com.example.domain.utils.Juhe;
+import com.example.domain.utils.JuheUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class StockServiceImpl implements StockService {
     StockRepository stockRepository;
 
     @Autowired
-    Juhe juhe;
+    JuheUtil juheUtil;
 
     /**
      * 从ws获取当天（接口调用默认就是当天数据）上证全部a股数据并存库
@@ -27,7 +27,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public void updateStocks() {
         for (int page = 1; page < 16; page++) {
-            JSONObject res = juhe.call("finance/stock/shall", "&stock=a&type=4&page=" + page);
+            JSONObject res = juheUtil.call("finance/stock/shall", "&stock=a&type=4&page=" + page);
             if (res != null) {
                 JSONArray array = res.getJSONArray("data");
                 if (array.size() > 0) {
@@ -51,7 +51,7 @@ public class StockServiceImpl implements StockService {
     public String showStocks() {
         JSONArray arrayList = new JSONArray();
         for (int page = 1; page < 16; page++) {
-            JSONObject res = juhe.call("finance/stock/shall", "&stock=a&type=4&page=" + page);
+            JSONObject res = juheUtil.call("finance/stock/shall", "&stock=a&type=4&page=" + page);
             if (res != null) {
                 JSONArray array = res.getJSONArray("data");
                 if (array.size() > 0) {

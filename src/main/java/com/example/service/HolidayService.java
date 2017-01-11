@@ -2,6 +2,7 @@ package com.example.service;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -12,5 +13,5 @@ public interface HolidayService {
     @Transactional
     void init();
 
-    boolean isCloseday(Date date);
+    boolean isCloseday(LocalDate date);
 }

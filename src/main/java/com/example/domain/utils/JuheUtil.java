@@ -12,8 +12,8 @@ import org.springframework.web.client.RestTemplate;
  */
 @Component
 @ConfigurationProperties(prefix = "juhe",locations = "classpath:/wsconf.properties")
-public class Juhe {
-    private static final Logger log = LoggerFactory.getLogger(Juhe.class);
+public class JuheUtil {
+    private static final Logger log = LoggerFactory.getLogger(JuheUtil.class);
     private String site;
     private String appkey;
 

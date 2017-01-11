@@ -2,13 +2,11 @@ package com.example.service;
 
 import com.example.domain.Holiday;
 import com.example.domain.HolidayRepository;
+import com.example.domain.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Created by djklaf on 2017/1/10.
@@ -17,6 +15,9 @@ import java.util.Date;
 public class HolidayServiceImpl implements HolidayService {
     @Autowired
     HolidayRepository holidayRepository;
+
+    @Autowired
+    DateUtil dateUtil;
 
     /*
 　   2017休市安排
@@ -33,42 +34,42 @@ public class HolidayServiceImpl implements HolidayService {
     @Override
     public void init(){
         Holiday[] yuandan = {
-                new Holiday(str2Date("2017-01-01"),"元旦",0),
-                new Holiday(str2Date("2017-01-02"),"元旦",0),
+                new Holiday(dateUtil.str2Date("2017-01-01"),"元旦",0),
+                new Holiday(dateUtil.str2Date("2017-01-02"),"元旦",0),
         };
         Holiday[] chunjie = {
-                new Holiday(str2Date("2017-01-27"),"春节",0),
-                new Holiday(str2Date("2017-01-28"),"春节",0),
-                new Holiday(str2Date("2017-01-29"),"春节",0),
-                new Holiday(str2Date("2017-01-30"),"春节",0),
-                new Holiday(str2Date("2017-01-31"),"春节",0),
-                new Holiday(str2Date("2017-02-01"),"春节",0),
-                new Holiday(str2Date("2017-01-02"),"春节",0),
+                new Holiday(dateUtil.str2Date("2017-01-27"),"春节",0),
+                new Holiday(dateUtil.str2Date("2017-01-28"),"春节",0),
+                new Holiday(dateUtil.str2Date("2017-01-29"),"春节",0),
+                new Holiday(dateUtil.str2Date("2017-01-30"),"春节",0),
+                new Holiday(dateUtil.str2Date("2017-01-31"),"春节",0),
+                new Holiday(dateUtil.str2Date("2017-02-01"),"春节",0),
+                new Holiday(dateUtil.str2Date("2017-01-02"),"春节",0),
         };
         Holiday[] qingming = {
-                new Holiday(str2Date("2017-04-02"),"清明节",0),
-                new Holiday(str2Date("2017-04-03"),"清明节",0),
-                new Holiday(str2Date("2017-04-04"),"清明节",0),
+                new Holiday(dateUtil.str2Date("2017-04-02"),"清明节",0),
+                new Holiday(dateUtil.str2Date("2017-04-03"),"清明节",0),
+                new Holiday(dateUtil.str2Date("2017-04-04"),"清明节",0),
         };
         Holiday[] laodong = {
-                new Holiday(str2Date("2017-04-29"),"劳动节",0),
-                new Holiday(str2Date("2017-04-30"),"劳动节",0),
-                new Holiday(str2Date("2017-05-01"),"劳动节",0),
+                new Holiday(dateUtil.str2Date("2017-04-29"),"劳动节",0),
+                new Holiday(dateUtil.str2Date("2017-04-30"),"劳动节",0),
+                new Holiday(dateUtil.str2Date("2017-05-01"),"劳动节",0),
         };
         Holiday[] duanwu = {
-                new Holiday(str2Date("2017-05-28"),"端午节",0),
-                new Holiday(str2Date("2017-05-29"),"端午节",0),
-                new Holiday(str2Date("2017-05-30"),"端午节",0),
+                new Holiday(dateUtil.str2Date("2017-05-28"),"端午节",0),
+                new Holiday(dateUtil.str2Date("2017-05-29"),"端午节",0),
+                new Holiday(dateUtil.str2Date("2017-05-30"),"端午节",0),
         };
         Holiday[] guoqing = {
-                new Holiday(str2Date("2017-10-01"),"国庆节",0),
-                new Holiday(str2Date("2017-10-02"),"国庆节",0),
-                new Holiday(str2Date("2017-10-03"),"国庆节",0),
-                new Holiday(str2Date("2017-10-04"),"中秋节",0),
-                new Holiday(str2Date("2017-10-05"),"国庆节",0),
-                new Holiday(str2Date("2017-10-06"),"国庆节",0),
-                new Holiday(str2Date("2017-10-07"),"国庆节",0),
-                new Holiday(str2Date("2017-10-08"),"国庆节",0),
+                new Holiday(dateUtil.str2Date("2017-10-01"),"国庆节",0),
+                new Holiday(dateUtil.str2Date("2017-10-02"),"国庆节",0),
+                new Holiday(dateUtil.str2Date("2017-10-03"),"国庆节",0),
+                new Holiday(dateUtil.str2Date("2017-10-04"),"中秋节",0),
+                new Holiday(dateUtil.str2Date("2017-10-05"),"国庆节",0),
+                new Holiday(dateUtil.str2Date("2017-10-06"),"国庆节",0),
+                new Holiday(dateUtil.str2Date("2017-10-07"),"国庆节",0),
+                new Holiday(dateUtil.str2Date("2017-10-08"),"国庆节",0),
         };
 
         for (Holiday h : yuandan){
@@ -94,11 +95,9 @@ public class HolidayServiceImpl implements HolidayService {
      * 判断是否节假休市日
      * @return
      */
-    public boolean isCloseday(Date date){
-        date = str2Date(date2Str(date));
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        if(isWeekend(calendar)){
+    public boolean isCloseday(LocalDate date){
+        date = dateUtil.str2Date(date.toString());
+        if(dateUtil.isWeekend(date)){
             return true;
         }else {
             Holiday holiday = holidayRepository.findByDate(date);
@@ -107,50 +106,5 @@ public class HolidayServiceImpl implements HolidayService {
             }
             return false;
         }
-    }
-
-    /**
-     * 判断是否是周末
-     * @return
-     */
-    public boolean isWeekend(Calendar cal){
-        int week=cal.get(Calendar.DAY_OF_WEEK)-1;
-        //0代表周日，6代表周六
-        if(week ==6 || week==0){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * String转Date
-     * @param date
-     * @return
-     */
-    public Date str2Date(String date){
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        Date dt= null;
-        try {
-            dt = sdf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return dt;
-    }
-
-    /**
-     * Date转String
-     * @param date
-     * @return
-     */
-    public String date2Str(Date date){
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        String str = null;
-        try {
-            str = sdf.format(date);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return str;
     }
 }

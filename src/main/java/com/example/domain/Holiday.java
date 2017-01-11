@@ -1,6 +1,7 @@
 package com.example.domain;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -14,7 +15,7 @@ public class Holiday {
 
     }
 
-    public Holiday(Date holiday, String name, int isopen) {
+    public Holiday(LocalDate holiday, String name, int isopen) {
         this.holiday = holiday;
         this.name = name;
         this.isopen = isopen;
@@ -25,7 +26,7 @@ public class Holiday {
     private int Id;
 
     @Column(nullable = false,length = 10)
-    private Date holiday;
+    private LocalDate holiday;
 
     @Column
     private String name;
@@ -44,11 +45,11 @@ public class Holiday {
         Id = id;
     }
 
-    public Date getHoliday() {
+    public LocalDate getHoliday() {
         return holiday;
     }
 
-    public void setHoliday(Date holiday) {
+    public void setHoliday(LocalDate holiday) {
         this.holiday = holiday;
     }
 

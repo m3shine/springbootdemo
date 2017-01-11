@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+
 @RestController
 @SpringBootApplication
 public class DemoApplication {
 
 	@Autowired
 	HolidayService holidayService;
+
 
 	@RequestMapping("/init")
 	void initHoliday(){
@@ -25,6 +27,7 @@ public class DemoApplication {
 	    /*SpringApplication app = new SpringApplication(DemoApplication.class);
 	    app.setBannerMode(Banner.Mode.OFF);
 	    app.run(args);*/
+
 		SpringApplication.run(DemoApplication.class, args);
 	}
 }
