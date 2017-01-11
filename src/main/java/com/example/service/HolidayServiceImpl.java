@@ -28,7 +28,7 @@ public class HolidayServiceImpl implements HolidayService {
 　　（六）中秋节、国庆节：10月1日（星期日）至10月8日（星期日）休市，10月9日（星期一）起照常开市。9月30日（星期六）为周末休市。
     */
     /**
-     初始化休市日
+     数据库初始化休市日，一年只执行一次。
      */
     @Override
     public void init(){
@@ -91,7 +91,7 @@ public class HolidayServiceImpl implements HolidayService {
         }
     }
     /**
-     * 判断是否是休市
+     * 判断是否节假休市日
      * @return
      */
     public boolean isCloseday(Date date){
@@ -101,8 +101,8 @@ public class HolidayServiceImpl implements HolidayService {
         if(isWeekend(calendar)){
             return true;
         }else {
-            Holiday holiday1 = holidayRepository.findByDate(date);
-            if(holiday1!=null){
+            Holiday holiday = holidayRepository.findByDate(date);
+            if(holiday != null){
                 return true;
             }
             return false;
@@ -123,7 +123,7 @@ public class HolidayServiceImpl implements HolidayService {
     }
 
     /**
-     * String 转 Date
+     * String转Date
      * @param date
      * @return
      */

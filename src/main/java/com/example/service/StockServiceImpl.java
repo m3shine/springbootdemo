@@ -21,6 +21,9 @@ public class StockServiceImpl implements StockService {
     @Autowired
     Juhe juhe;
 
+    /**
+     * 从ws获取当天（接口调用默认就是当天数据）上证全部a股数据并存库
+     */
     @Override
     public void updateStocks() {
         for (int page = 1; page < 16; page++) {

@@ -12,6 +12,6 @@ import java.util.Date;
 public interface HolidayRepository extends JpaRepository<Holiday,Long>{
 
     /*from Holiday H需大写*/
-    @Query("from Holiday h where h.holiday=:holiday")
+    @Query("from Holiday h where DATE_FORMAT(h.holiday,'%Y-%m-%d')=:holiday")
     Holiday findByDate(@Param("holiday") Date date);
 }
