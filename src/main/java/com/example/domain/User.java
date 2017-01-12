@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
  * Created by djklaf on 2017/1/9.
  */
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
     public User(){

@@ -1,14 +1,15 @@
 package com.example.service;
 
-import org.springframework.transaction.annotation.Transactional;
+import java.time.LocalDate;
 
 /**
  * Created by djklaf on 2017/1/9.
  */
 public interface StockService {
 
-    @Transactional
-    void updateStocks();
+    void initSHStocks();
 
     String showStocks();
+
+    String pickStocks(LocalDate date, Double percent);
 }

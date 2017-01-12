@@ -1,10 +1,10 @@
 package com.example.web;
 
-
 import com.example.service.HolidayService;
 import com.example.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -22,7 +22,8 @@ public class StockController {
     @Autowired
     HolidayService holidayService;
 
-    @RequestMapping(value = "/showAll")
+    @RequestMapping(value = "/showsh")
+    @ResponseBody
     public String showStocks(){
         if(holidayService.isCloseday(LocalDate.now())){
             return "";

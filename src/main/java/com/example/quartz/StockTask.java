@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
@@ -15,8 +14,8 @@ import java.time.LocalDate;
  */
 @Component
 @EnableScheduling
-public class UpdateAllStocksDailyTask {
-    private static final Logger log = LoggerFactory.getLogger(UpdateAllStocksDailyTask.class);
+public class StockTask {
+    private static final Logger log = LoggerFactory.getLogger(StockTask.class);
 
     @Autowired
     StockService stockService;
@@ -24,11 +23,11 @@ public class UpdateAllStocksDailyTask {
     @Autowired
     HolidayService holidayService;
 
-    @Scheduled(cron = "0 05 15 * * ?")
-    public void updateAllStocksDaily(){
+    //@Scheduled(cron = "0 05 15 * * ?")
+    public void updateStockRecordDaily(){
         if(holidayService.isCloseday(LocalDate.now())){
             return;
         }
-        stockService.updateStocks();
+        //stockService.updateStocks();
     }
 }
