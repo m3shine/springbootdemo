@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.domain.utils;
 
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;

@@ -11,7 +11,7 @@ import java.time.LocalDate;
  */
 public interface HolidayRepository extends JpaRepository<Holiday,Long>{
 
-    /*from Holiday H需大写*/
+    /*from Holiday H需大写，因为JPQL不是从数据表中查询，而是从域模型中查询*/
     @Query("from Holiday h where h.holiday=:holiday and isopen=0")
     Holiday findByDate(@Param("holiday") LocalDate date);
 }

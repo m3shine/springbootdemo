@@ -12,4 +12,8 @@ public interface StockService {
     String showStocks();
 
     String pickStocks(LocalDate date, Double percent);
+
+    void addNewStocks();
+
+    Boolean haveNewStocks();
 }

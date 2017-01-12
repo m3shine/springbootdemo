@@ -7,7 +7,7 @@ import java.sql.Date;
 
 /**
  * Created by djklaf on 2017/1/11.
- * 此类的存在是因为当前jpa不支持jdk8的LocalDate专门写的，当程序执行创建表的时候可自动将JAVA的LocalDate映射为Date而不是BLOB
+ * 此类的存在是因为当前jpa版本（1.4.3）不支持jdk8的LocalDate专门写的，当程序执行创建表的时候可自动将JAVA的LocalDate映射为Date而不是BLOB
  */
 @Converter(autoApply = true)
 public class LocalDateAttributeConverter implements AttributeConverter<LocalDate, Date> {

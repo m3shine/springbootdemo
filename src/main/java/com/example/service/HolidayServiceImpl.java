@@ -5,6 +5,7 @@ import com.example.domain.HolidayRepository;
 import com.example.domain.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
@@ -29,66 +30,69 @@ public class HolidayServiceImpl implements HolidayService {
 　　（六）中秋节、国庆节：10月1日（星期日）至10月8日（星期日）休市，10月9日（星期一）起照常开市。9月30日（星期六）为周末休市。
     */
     /**
-     数据库初始化休市日，一年只执行一次。
+     数据库初始化休市日
      */
     @Override
+    @Transactional
     public void init(){
-        Holiday[] yuandan = {
-                new Holiday(dateUtil.str2Date("2017-01-01"),"元旦",0),
-                new Holiday(dateUtil.str2Date("2017-01-02"),"元旦",0),
-        };
-        Holiday[] chunjie = {
-                new Holiday(dateUtil.str2Date("2017-01-27"),"春节",0),
-                new Holiday(dateUtil.str2Date("2017-01-28"),"春节",0),
-                new Holiday(dateUtil.str2Date("2017-01-29"),"春节",0),
-                new Holiday(dateUtil.str2Date("2017-01-30"),"春节",0),
-                new Holiday(dateUtil.str2Date("2017-01-31"),"春节",0),
-                new Holiday(dateUtil.str2Date("2017-02-01"),"春节",0),
-                new Holiday(dateUtil.str2Date("2017-01-02"),"春节",0),
-        };
-        Holiday[] qingming = {
-                new Holiday(dateUtil.str2Date("2017-04-02"),"清明节",0),
-                new Holiday(dateUtil.str2Date("2017-04-03"),"清明节",0),
-                new Holiday(dateUtil.str2Date("2017-04-04"),"清明节",0),
-        };
-        Holiday[] laodong = {
-                new Holiday(dateUtil.str2Date("2017-04-29"),"劳动节",0),
-                new Holiday(dateUtil.str2Date("2017-04-30"),"劳动节",0),
-                new Holiday(dateUtil.str2Date("2017-05-01"),"劳动节",0),
-        };
-        Holiday[] duanwu = {
-                new Holiday(dateUtil.str2Date("2017-05-28"),"端午节",0),
-                new Holiday(dateUtil.str2Date("2017-05-29"),"端午节",0),
-                new Holiday(dateUtil.str2Date("2017-05-30"),"端午节",0),
-        };
-        Holiday[] guoqing = {
-                new Holiday(dateUtil.str2Date("2017-10-01"),"国庆节",0),
-                new Holiday(dateUtil.str2Date("2017-10-02"),"国庆节",0),
-                new Holiday(dateUtil.str2Date("2017-10-03"),"国庆节",0),
-                new Holiday(dateUtil.str2Date("2017-10-04"),"中秋节",0),
-                new Holiday(dateUtil.str2Date("2017-10-05"),"国庆节",0),
-                new Holiday(dateUtil.str2Date("2017-10-06"),"国庆节",0),
-                new Holiday(dateUtil.str2Date("2017-10-07"),"国庆节",0),
-                new Holiday(dateUtil.str2Date("2017-10-08"),"国庆节",0),
-        };
+        if(holidayRepository.findAll().size() == 0) {
+            Holiday[] yuandan = {
+                    new Holiday(dateUtil.str2Date("2017-01-01"), "元旦", 0),
+                    new Holiday(dateUtil.str2Date("2017-01-02"), "元旦", 0),
+            };
+            Holiday[] chunjie = {
+                    new Holiday(dateUtil.str2Date("2017-01-27"), "春节", 0),
+                    new Holiday(dateUtil.str2Date("2017-01-28"), "春节", 0),
+                    new Holiday(dateUtil.str2Date("2017-01-29"), "春节", 0),
+                    new Holiday(dateUtil.str2Date("2017-01-30"), "春节", 0),
+                    new Holiday(dateUtil.str2Date("2017-01-31"), "春节", 0),
+                    new Holiday(dateUtil.str2Date("2017-02-01"), "春节", 0),
+                    new Holiday(dateUtil.str2Date("2017-01-02"), "春节", 0),
+            };
+            Holiday[] qingming = {
+                    new Holiday(dateUtil.str2Date("2017-04-02"), "清明节", 0),
+                    new Holiday(dateUtil.str2Date("2017-04-03"), "清明节", 0),
+                    new Holiday(dateUtil.str2Date("2017-04-04"), "清明节", 0),
+            };
+            Holiday[] laodong = {
+                    new Holiday(dateUtil.str2Date("2017-04-29"), "劳动节", 0),
+                    new Holiday(dateUtil.str2Date("2017-04-30"), "劳动节", 0),
+                    new Holiday(dateUtil.str2Date("2017-05-01"), "劳动节", 0),
+            };
+            Holiday[] duanwu = {
+                    new Holiday(dateUtil.str2Date("2017-05-28"), "端午节", 0),
+                    new Holiday(dateUtil.str2Date("2017-05-29"), "端午节", 0),
+                    new Holiday(dateUtil.str2Date("2017-05-30"), "端午节", 0),
+            };
+            Holiday[] guoqing = {
+                    new Holiday(dateUtil.str2Date("2017-10-01"), "国庆节", 0),
+                    new Holiday(dateUtil.str2Date("2017-10-02"), "国庆节", 0),
+                    new Holiday(dateUtil.str2Date("2017-10-03"), "国庆节", 0),
+                    new Holiday(dateUtil.str2Date("2017-10-04"), "中秋节", 0),
+                    new Holiday(dateUtil.str2Date("2017-10-05"), "国庆节", 0),
+                    new Holiday(dateUtil.str2Date("2017-10-06"), "国庆节", 0),
+                    new Holiday(dateUtil.str2Date("2017-10-07"), "国庆节", 0),
+                    new Holiday(dateUtil.str2Date("2017-10-08"), "国庆节", 0),
+            };
 
-        for (Holiday h : yuandan){
-            holidayRepository.save(h);
-        }
-        for (Holiday h : chunjie){
-            holidayRepository.save(h);
-        }
-        for (Holiday h : qingming){
-            holidayRepository.save(h);
-        }
-        for (Holiday h : laodong){
-            holidayRepository.save(h);
-        }
-        for (Holiday h : duanwu){
-            holidayRepository.save(h);
-        }
-        for (Holiday h : guoqing){
-            holidayRepository.save(h);
+            for (Holiday h : yuandan) {
+                holidayRepository.save(h);
+            }
+            for (Holiday h : chunjie) {
+                holidayRepository.save(h);
+            }
+            for (Holiday h : qingming) {
+                holidayRepository.save(h);
+            }
+            for (Holiday h : laodong) {
+                holidayRepository.save(h);
+            }
+            for (Holiday h : duanwu) {
+                holidayRepository.save(h);
+            }
+            for (Holiday h : guoqing) {
+                holidayRepository.save(h);
+            }
         }
     }
     /**
