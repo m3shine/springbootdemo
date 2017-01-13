@@ -82,7 +82,7 @@ public class ShowAPIProperties {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.info(e.getMessage());
         }
         String url = this.getSite()+path+"?showapi_appid=" +this.getAppid()+"&showapi_sign="+this.getSign()+params;
         RestTemplate restTemplate = new RestTemplate();
@@ -92,7 +92,7 @@ public class ShowAPIProperties {
             JSONObject result = json.getJSONObject("showapi_res_body");
             return result;
         }else{
-            log.error("调用接口发生错误，错误码："+json.getString("showapi_res_error")+"\r\n");
+            log.info("调用接口发生错误，错误码："+json.getString("showapi_res_error")+"\r\n");
         }
         return null;
     }

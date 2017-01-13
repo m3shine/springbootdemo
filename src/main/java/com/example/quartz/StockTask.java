@@ -42,7 +42,7 @@ public class StockTask {
     /**
      * 每天更新股票记录
      */
-    @Scheduled(cron = "0 05 15 * * ?")
+    @Scheduled(cron = "0 07 16 * * ?")
     public void updateStockRecordDaily(){
         if(holidayService.isCloseday(LocalDate.now())){
             return;
