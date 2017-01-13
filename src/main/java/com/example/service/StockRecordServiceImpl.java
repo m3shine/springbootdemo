@@ -55,7 +55,7 @@ public class StockRecordServiceImpl implements StockRecordService {
                         stockRecord.setTurnover(obj.getString("turnover"));
                         stockRecord.setPe(obj.getString("pe"));
                         stockRecord.setPb(obj.getString("pb"));
-                        //System.out.println(res);
+                        System.out.println(res);
                         stockRecordRepository.save(stockRecord);
                     }
                 }

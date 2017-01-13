@@ -34,7 +34,7 @@ public class StockTask {
      * 有新股则插入，没有则不更新.
      * 时间要早于记录更新
      */
-    @Scheduled(cron = "0 00 10 * * ?")
+    @Scheduled(cron = "0 0 10 * * ?")
     public void addNewStocks(){
         stockService.addNewStocks();
     }
