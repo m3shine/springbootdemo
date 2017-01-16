@@ -56,9 +56,15 @@ public class StockRecordServiceImpl implements StockRecordService {
                             stockRecord.setDate(dateUtil.str2Date(obj.getString("date")));
                             stockRecord.setDiffMoney(obj.getDouble("diff_money"));
                             stockRecord.setDiffRate(obj.getDouble("diff_rate"));
-                            stockRecord.setTurnover(obj.getString("turnover"));
-                            stockRecord.setPe(obj.getString("pe"));
-                            stockRecord.setPb(obj.getString("pb"));
+                            if(obj.has("turnover")) {
+                                stockRecord.setTurnover(obj.getString("turnover"));
+                            }
+                            if(obj.has("pe")) {
+                                stockRecord.setPe(obj.getString("pe"));
+                            }
+                            if(obj.has("pb")) {
+                                stockRecord.setPb(obj.getString("pb"));
+                            }
                             stockRecordRepository.save(stockRecord);
                         }
                     }
