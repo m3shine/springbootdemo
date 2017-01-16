@@ -10,10 +10,9 @@ import org.springframework.data.repository.query.Param;
  * Created by djklaf on 2017/1/12.
  */
 public interface StockRecordRepository extends JpaRepository<StockRecord,Long> {
-    /*@Query("select sr , ROUND(sum(sr.diff_rate),2)  rate from StockRecord sr\n" +
+    /*@Query("select sr , round(sum(sr.diff_rate),2) as rate from StockRecord sr\n" +
             "group by sr.code\n" +
-            "having sr.rate >= :rate")
-    Page<StockRecord> findBySumRate(@Param("rate") Double sumrate);*/
-    Page<Object[]> findBySumRate();
+            "having sr.rate >= :rate")*/
+    Page<Object[]> findBySumRate(@Param("rate") Double rate);
 
 }
