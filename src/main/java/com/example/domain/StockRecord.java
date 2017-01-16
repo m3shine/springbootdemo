@@ -83,11 +83,6 @@ public class StockRecord {
     @Column
     private String pb;
 
-    /**
-     * 累计涨跌幅（数据库全部日期累加）
-     */
-    private Double sumRate;
-
 
     public Long getId() {
         return Id;
@@ -201,11 +196,4 @@ public class StockRecord {
         this.pb = pb;
     }
 
-    public Double getSumRate() {
-        return sumRate;
-    }
-
-    public void setSumRate(Double sumRate) {
-        this.sumRate = sumRate;
-    }
 }

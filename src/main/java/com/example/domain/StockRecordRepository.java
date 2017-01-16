@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 /**
  * Created by djklaf on 2017/1/12.
  */
@@ -13,5 +15,6 @@ public interface StockRecordRepository extends JpaRepository<StockRecord,Long> {
             "group by sr.code\n" +
             "having sr.rate >= :rate")
     Page<StockRecord> findBySumRate(@Param("rate") Double sumrate);*/
+    List<Object[]> findBySumRate();
 
 }
