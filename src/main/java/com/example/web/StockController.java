@@ -1,6 +1,7 @@
 package com.example.web;
 
 import com.example.service.HolidayService;
+import com.example.service.StockRecordService;
 import com.example.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,9 @@ public class StockController {
     @Autowired
     HolidayService holidayService;
 
+    @Autowired
+    StockRecordService stockRecordService;
+
     @RequestMapping(value = "/showsh")
     @ResponseBody
     public String showStocks(){
@@ -29,5 +33,10 @@ public class StockController {
             return "";
         }
         return stockService.showStocks();
+    }
+
+    @RequestMapping(value = "/find")
+    public String find(Double rate){
+        return stockRecordService.findBySumRate(rate).toString();
     }
 }
